@@ -32,10 +32,10 @@ app.get('/', (req, res) => {
   res.render('home');
 });
 
-app.get('/makecampground', async (req, res) => {
-  const camp = new CampGround({ title: 'My Backyard', description: 'Cheap Camping Place!' });
-  await camp.save();
-  res.send(camp);
+app.get('/campgrounds', async (req, res) => {
+  const campgrounds = await CampGround.find({});
+  res.render('campgrounds/index', { campgrounds });
+  console.log(campgrounds);
 });
 
 app.listen(port, () => {
