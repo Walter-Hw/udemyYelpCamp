@@ -16,9 +16,11 @@
       crossorigin="anonymous"
       defer
     ></script>
-    <title>Boilerplate</title>
+    <title>YelpCamp</title>
   </head>
-  <body>
-    <main class="container"><%- body %></main>
+  <body class="d-flex flex-column vh-100">
+    <%- include('../partials/navbar') %>
+    <main class="container mt-5"><%- body %></main>
+    <%- include('../partials/footer') %>
   </body>
 </html>
