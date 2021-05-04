@@ -1,23 +1,34 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const port = process.env.PORT || 3000;
+
+mongoose.connect(process.env.ATLAS_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+});
+
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'Connection Error:'));
+db.once('open', () => {
+  console.log('Atlas Database Connected!');
+});
 
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-mongoose.connect(process.env.ATLAS_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false
-});
+
 
 app.get('/', (req, res) => {
-  res.send(`<h1>Hello From Walter's YelpCamp Project</h1>`);
+  res.render('home');
 });
 
 app.listen(port, () => {
