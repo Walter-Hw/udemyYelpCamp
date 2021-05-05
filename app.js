@@ -36,10 +36,13 @@ app.get("/", (req, res) => {
   res.render("home");
 });
 
-app.get("/campgrounds", async (req, res) => {
-  const campgrounds = await CampGround.find({});
-  res.render("campgrounds/index", { campgrounds });
-});
+app.get(
+  "/campgrounds",
+  catchAsync(async (req, res) => {
+    const campgrounds = await CampGround.find({});
+    res.render("campgrounds/index", { campgrounds });
+  })
+);
 
 app.get("/campgrounds/new", (req, res) => {
   res.render("campgrounds/new");
@@ -54,11 +57,14 @@ app.post(
   })
 );
 
-app.get("/campgrounds/:id", async (req, res) => {
-  const { id } = req.params;
-  const campground = await CampGround.findById(id);
-  res.render("campgrounds/show", { campground });
-});
+app.get(
+  "/campgrounds/:id",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const campground = await CampGround.findById(id);
+    res.render("campgrounds/show", { campground });
+  })
+);
 
 app.get("/campgrounds/:id/edit", async (req, res) => {
   const { id } = req.params;
@@ -66,19 +72,25 @@ app.get("/campgrounds/:id/edit", async (req, res) => {
   res.render("campgrounds/edit", { campground });
 });
 
-app.put("/campgrounds/:id", async (req, res) => {
-  const { id } = req.params;
-  const campground = await CampGround.findByIdAndUpdate(id, {
-    ...req.body.campground,
-  });
-  res.redirect(`/campgrounds/${campground.id}`);
-});
+app.put(
+  "/campgrounds/:id",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const campground = await CampGround.findByIdAndUpdate(id, {
+      ...req.body.campground,
+    });
+    res.redirect(`/campgrounds/${campground.id}`);
+  })
+);
 
-app.delete("/campgrounds/:id", async (req, res) => {
-  const { id } = req.params;
-  await CampGround.findByIdAndDelete(id);
-  res.redirect("/campgrounds");
-});
+app.delete(
+  "/campgrounds/:id",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    await CampGround.findByIdAndDelete(id);
+    res.redirect("/campgrounds");
+  })
+);
 
 app.use((err, req, res, next) => {
   res.send("Oh, Something went wrong!!!");
