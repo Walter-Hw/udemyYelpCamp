@@ -2,10 +2,11 @@
 <div class="row">
   <h1 class="text-center">New Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds" method="POST">
+    <form action="/campgrounds" method="POST" novalidate class="validated-form">
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
+          required
           autocomplete="off"
           class="form-control"
           type="text"
@@ -13,10 +14,12 @@
           name="campground[title]"
           placeholder="Camp Ground Title"
         />
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
         <input
+          required
           autocomplete="off"
           class="form-control"
           type="text"
@@ -24,10 +27,12 @@
           name="campground[location]"
           placeholder="Camp Ground Location"
         />
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <div class="mb-3">
         <label for="image" class="form-label">Image URL</label>
         <input
+          required
           autocomplete="off"
           class="form-control"
           type="text"
@@ -35,29 +40,34 @@
           name="campground[image]"
           placeholder="Camp Ground Image"
         />
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <div class="mb-3">
         <label for="price">Campground Price</label>
         <div class="input-group">
           <span class="input-group-text" id="price-label">$</span>
           <input
+            required
             name="campground[price]"
             id="price"
             placeholder="0.00"
             type="text"
             class="form-control"
           />
+          <div class="valid-feedback">Looks Good!</div>
         </div>
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
         <textarea
+          required
           class="form-control"
           type="text"
           id="description"
           name="campground[description]"
           placeholder="Camp Ground Description"
         ></textarea>
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <button class="btn btn-success mb-3">Add Camp Ground</button>
     </form>

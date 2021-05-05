@@ -3,7 +3,12 @@
 <div class="row">
   <h1 class="text-center">Edit Campground</h1>
   <div class="col-6 offset-3">
-    <form action="/campgrounds/<%= campground.id %>?_method=PUT" method="POST">
+    <form
+      action="/campgrounds/<%= campground.id %>?_method=PUT"
+      method="POST"
+      novalidate
+      class="validated-form"
+    >
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
@@ -14,7 +19,9 @@
           id="title"
           name="campground[title]"
           placeholder="Camp Ground Title"
+          required
         />
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
@@ -26,7 +33,9 @@
           id="location"
           name="campground[location]"
           placeholder="Camp Ground Location"
+          required
         />
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <div class="mb-3">
         <label for="image" class="form-label">Image URL</label>
@@ -38,7 +47,9 @@
           id="image"
           name="campground[image]"
           placeholder="Camp Ground Image"
+          required
         />
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <div class="mb-3">
         <label for="price">Campground Price</label>
@@ -49,9 +60,11 @@
             name="campground[price]"
             id="price"
             placeholder="0.00"
-            type="text"
+            type="number"
             class="form-control"
+            required
           />
+          <div class="valid-feedback">Looks Good!</div>
         </div>
       </div>
       <div class="mb-3">
@@ -62,9 +75,11 @@
           id="description"
           name="campground[description]"
           placeholder="Camp Ground Description"
+          required
         >
 <%= campground.description %></textarea
         >
+        <div class="valid-feedback">Looks Good!</div>
       </div>
       <button class="btn btn-info mb-3">Update Campground</button>
     </form>

@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
+const catchAsync = require("./utils/catchAsync");
 const CampGround = require("./models/campGround");
 const methodOverride = require("method-override");
 
@@ -44,11 +45,14 @@ app.get("/campgrounds/new", (req, res) => {
   res.render("campgrounds/new");
 });
 
-app.post("/campgrounds", async (req, res) => {
-  const campground = new CampGround(req.body.campground);
-  await campground.save();
-  res.redirect(`/campgrounds/${campground.id}`);
-});
+app.post(
+  "/campgrounds",
+  catchAsync(async (req, res, next) => {
+    const campground = new CampGround(req.body.campground);
+    await campground.save();
+    res.redirect(`/campgrounds/${campground.id}`);
+  })
+);
 
 app.get("/campgrounds/:id", async (req, res) => {
   const { id } = req.params;
@@ -74,6 +78,10 @@ app.delete("/campgrounds/:id", async (req, res) => {
   const { id } = req.params;
   await CampGround.findByIdAndDelete(id);
   res.redirect("/campgrounds");
+});
+
+app.use((err, req, res, next) => {
+  res.send("Oh, Something went wrong!!!");
 });
 
 app.listen(port, () => {
