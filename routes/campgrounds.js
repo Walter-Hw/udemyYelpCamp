@@ -43,15 +43,26 @@ router.get(
   catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await CampGround.findById(id).populate("reviews");
+    if (!campground) {
+      req.flash("error", "Sorry! Cannot find that campground.");
+      return res.redirect("/campgrounds");
+    }
     res.render("campgrounds/show", { campground });
   })
 );
 
-router.get("/:id/edit", async (req, res) => {
-  const { id } = req.params;
-  const campground = await CampGround.findById(id);
-  res.render("campgrounds/edit", { campground });
-});
+router.get(
+  "/:id/edit",
+  catchAsync(async (req, res) => {
+    const { id } = req.params;
+    const campground = await CampGround.findById(id);
+    if (!campground) {
+      req.flash("error", "Sorry! Cannot find that campground.");
+      return res.redirect("/campgrounds");
+    }
+    res.render("campgrounds/edit", { campground });
+  })
+);
 
 router.put(
   "/:id",
