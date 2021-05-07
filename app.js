@@ -3,8 +3,9 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const ejsMate = require("ejs-mate");
-const { campgroundSchema, reviewSchema } = require("./schemaValidation");
+const session = require("express-session");
 
+const { campgroundSchema, reviewSchema } = require("./schemaValidation");
 const Review = require("./models/review");
 const methodOverride = require("method-override");
 const CampGround = require("./models/campGround");
@@ -32,6 +33,18 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+const sessionConfig = {
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  },
+};
+app.use(session(sessionConfig));
 
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
