@@ -5,11 +5,7 @@ const path = require('path');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
-
-const { campgroundSchema, reviewSchema } = require('./schemaValidation');
-const Review = require('./models/review');
 const methodOverride = require('method-override');
-const CampGround = require('./models/campGround');
 
 const campgrounds = require('./routes/campgrounds');
 const reviews = require('./routes/reviews');
