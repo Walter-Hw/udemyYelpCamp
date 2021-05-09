@@ -14,6 +14,9 @@
         </li>
         <li class="list-group-item">$<%= campground.price %> / Night</li>
       </ul>
+      <% if (currentUser && campground.author.equals(currentUser.id)) { %>
+      <%console.log('CURRENT USER =>',currentUser) %>
+      <%console.log('campground.author =>',campground.author) %>
       <div class="card-body">
         <a
           class="card-link btn btn-warning"
@@ -27,17 +30,15 @@
         >
           <button class="btn btn-danger">Delete</button>
         </form>
-        <a class="card-link btn btn-primary" href="/campgrounds"
-          >All Campgrounds</a
-        >
       </div>
+      <% } %>
       <div class="card-footer text-muted">
         <small>2 days ago</small>
       </div>
     </div>
   </div>
   <div class="col-6">
-    <h2>Leave a Reivew</h2>
+    <h2>Leave a Review</h2>
     <form
       action="/campgrounds/<%= campground.id %>/reviews"
       method="POST"
