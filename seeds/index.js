@@ -1,8 +1,8 @@
-require("dotenv").config();
-const mongoose = require("mongoose");
-const CampGround = require("../models/campGround");
-const cities = require("./cities");
-const { places, descriptors } = require("./seedHelpers");
+require('dotenv').config();
+const mongoose = require('mongoose');
+const CampGround = require('../models/campGround');
+const cities = require('./cities');
+const { places, descriptors } = require('./seedHelpers');
 
 mongoose.connect(process.env.ATLAS_URL, {
   useNewUrlParser: true,
@@ -12,12 +12,12 @@ mongoose.connect(process.env.ATLAS_URL, {
 });
 
 const db = mongoose.connection;
-db.on("error", console.error.bind(console, "Connection Error:"));
-db.once("open", () => {
-  console.log("Atlas Database Connected!");
+db.on('error', console.error.bind(console, 'Connection Error:'));
+db.once('open', () => {
+  console.log('Atlas Database Connected!');
 });
 
-const sample = (array) => array[Math.floor(Math.random() * array.length)];
+const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
   await CampGround.deleteMany({});
@@ -25,6 +25,7 @@ const seedDB = async () => {
     const random1000 = Math.floor(Math.random() * 1000);
     const price = Math.floor(Math.random() * 20) + 10;
     const camp = new CampGround({
+      author: '609747d40e91b80e228ab16a',
       location: `${cities[random1000].city}, ${cities[random1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       image: `https://source.unsplash.com/collection/483251`,
