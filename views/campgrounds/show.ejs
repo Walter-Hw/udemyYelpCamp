@@ -15,8 +15,6 @@
         <li class="list-group-item">$<%= campground.price %> / Night</li>
       </ul>
       <% if (currentUser && campground.author.equals(currentUser.id)) { %>
-      <%console.log('CURRENT USER =>',currentUser) %>
-      <%console.log('campground.author =>',campground.author) %>
       <div class="card-body">
         <a
           class="card-link btn btn-warning"
