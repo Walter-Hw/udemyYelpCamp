@@ -9,8 +9,10 @@ const methodOverride = require('method-override');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 
-const campgrounds = require('./routes/campgrounds');
-const reviews = require('./routes/reviews');
+const campgroundsRoutes = require('./routes/campgrounds');
+const reviewsRoutes = require('./routes/reviews');
+const userRoutes = require('./routes/users');
+
 const User = require('./models/user');
 
 const app = express();
@@ -63,8 +65,9 @@ app.get('/fakeuser', async (req, res, next) => {
   res.send(newUser);
 });
 
-app.use('/campgrounds', campgrounds);
-app.use('/campgrounds/:id/reviews', reviews);
+app.use('/', userRoutes);
+app.use('/campgrounds', campgroundsRoutes);
+app.use('/campgrounds/:id/reviews', reviewsRoutes);
 
 app.use(passport.initialize());
 app.use(passport.session());
