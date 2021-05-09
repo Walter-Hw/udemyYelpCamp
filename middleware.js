@@ -1,6 +1,7 @@
-const { reviewSchema, campgroundSchema } = require('./models/review');
+const { reviewSchema, campgroundSchema } = require('./schemaValidation');
 const ExpressError = require('./utils/ExpressError');
 const CampGround = require('./models/campGround');
+const Review = require('./models/review');
 
 module.exports.isLoggedIn = (req, res, next) => {
   if (!req.isAuthenticated()) {
@@ -39,4 +40,14 @@ module.exports.validateReview = (req, res, next) => {
   } else {
     next();
   }
+};
+
+module.exports.isReviewAuthor = async (req, res, next) => {
+  const { id, reviewId } = req.params;
+  const review = await Review.findById(reviewId);
+  if (!review.author.equals(req.user.id)) {
+    req.flash('error', `You don't have authorization to do the action!`);
+    return res.redirect(`/campgrounds/${id}`);
+  }
+  next();
 };
