@@ -25,7 +25,7 @@ module.exports.validateCampground = (req, res, next) => {
 module.exports.isAuthor = async (req, res, next) => {
   const { id } = req.params;
   const campground = await CampGround.findById(id);
-  if (!campground.author.equals(req.user.id)) {
+  if (!campground.author.equals(req.user._id)) {
     req.flash('error', `You don't have authorization to do the action!`);
     return res.redirect(`/campgrounds/${id}`);
   }
@@ -45,7 +45,7 @@ module.exports.validateReview = (req, res, next) => {
 module.exports.isReviewAuthor = async (req, res, next) => {
   const { id, reviewId } = req.params;
   const review = await Review.findById(reviewId);
-  if (!review.author.equals(req.user.id)) {
+  if (!review.author.equals(req.user._id)) {
     req.flash('error', `You don't have authorization to do the action!`);
     return res.redirect(`/campgrounds/${id}`);
   }
