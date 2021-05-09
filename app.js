@@ -31,15 +31,14 @@ db.once('open', () => {
   console.log('Atlas Database Connected Successfully!!!'.toUpperCase());
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
-app.use(flash());
-
 app.engine('ejs', ejsMate);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
 
 const sessionConfig = {
   secret: process.env.SECRET,
@@ -51,23 +50,9 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24 * 7,
   },
 };
+
 app.use(session(sessionConfig));
-
-app.use((req, res, next) => {
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
-});
-
-app.get('/fakeuser', async (req, res, next) => {
-  const user = new User({ email: 'autumnhao@gmail.com', username: 'autumn' });
-  const newUser = await User.register(user, 'haha');
-  res.send(newUser);
-});
-
-app.use('/', userRoutes);
-app.use('/campgrounds', campgroundsRoutes);
-app.use('/campgrounds/:id/reviews', reviewsRoutes);
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -75,6 +60,16 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
+});
+
+app.use('/', userRoutes);
+app.use('/campgrounds', campgroundsRoutes);
+app.use('/campgrounds/:id/reviews', reviewsRoutes);
 
 app.get('/', (req, res) => {
   res.render('home');
