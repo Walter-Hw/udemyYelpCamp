@@ -39,12 +39,13 @@ const seedDB = async () => {
       },
       images: [
         {
-          url: 'https://scx2.b-cdn.net/gfx/news/hires/2019/2-forest.jpg',
+          url:
+            'https://res.cloudinary.com/dyayk6qhg/image/upload/v1620663008/samples/landscapes/beach-boat.jpg',
           filename: 'YelpCamp/wziuh5sqd8f3nlrchttv',
         },
         {
           url:
-            'https://api.timeforkids.com/wp-content/uploads/2019/09/final-cover-forest.jpg',
+            'https://res.cloudinary.com/dyayk6qhg/image/upload/v1620663012/samples/landscapes/nature-mountains.jpg',
           filename: 'YelpCamp/pdcrffmqplxiycn2zhp0',
         },
       ],
