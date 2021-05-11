@@ -18,6 +18,7 @@ const MongoStore = require('connect-mongo');
 const campgroundsRoutes = require('./routes/campgrounds');
 const reviewsRoutes = require('./routes/reviews');
 const userRoutes = require('./routes/users');
+const ExpressError = require('./utils/ExpressError');
 
 const User = require('./models/user');
 
@@ -80,6 +81,7 @@ app.use(
       scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
       styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
       workerSrc: ["'self'", 'blob:'],
+      childSrc: ["'self'", 'blob:'],
       objectSrc: [],
       imgSrc: [
         "'self'",
