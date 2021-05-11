@@ -13,6 +13,7 @@ const passport = require('passport');
 const helmet = require('helmet');
 const LocalStrategy = require('passport-local');
 const mongoSanitize = require('express-mongo-sanitize');
+const MongoStore = require('connect-mongo');
 
 const campgroundsRoutes = require('./routes/campgrounds');
 const reviewsRoutes = require('./routes/reviews');
@@ -92,7 +93,20 @@ app.use(
   })
 );
 
+const store = MongoStore.create({
+  mongoUrl: process.env.ATLAS_URL,
+  touchAfter: 24 * 3600,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+});
+
+store.on('error', e => {
+  console.log('Error occurs!!!', e);
+});
+
 const sessionConfig = {
+  store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
