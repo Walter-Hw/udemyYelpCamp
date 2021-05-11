@@ -30,16 +30,21 @@ const seedDB = async () => {
       title: `${sample(descriptors)} ${sample(places)}`,
       description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate reprehenderit voluptas vero possimus corrupti, aliquid repellat laudantium animi tempore! Dignissimos, esse itaque.`,
       price: price,
-      geometry: { type: 'Point', coordinates: [-117.8103, 34.0286] },
+      geometry: {
+        type: 'Point',
+        coordinates: [
+          cities[random1000].longitude,
+          cities[random1000].latitude,
+        ],
+      },
       images: [
         {
-          url:
-            'https://res.cloudinary.com/dyayk6qhg/image/upload/v1620669529/YelpCamp/wziuh5sqd8f3nlrchttv.jpg',
+          url: 'https://scx2.b-cdn.net/gfx/news/hires/2019/2-forest.jpg',
           filename: 'YelpCamp/wziuh5sqd8f3nlrchttv',
         },
         {
           url:
-            'https://res.cloudinary.com/dyayk6qhg/image/upload/v1620669535/YelpCamp/pdcrffmqplxiycn2zhp0.jpg',
+            'https://api.timeforkids.com/wp-content/uploads/2019/09/final-cover-forest.jpg',
           filename: 'YelpCamp/pdcrffmqplxiycn2zhp0',
         },
       ],
