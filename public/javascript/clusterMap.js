@@ -1,5 +1,5 @@
 mapboxgl.accessToken = mapToken;
-var map = new mapboxgl.Map({
+const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/mapbox/light-v10',
   center: [-103.59179687498357, 40.66995747013945],
@@ -71,10 +71,10 @@ map.on('load', function () {
 
   // inspect a cluster on click
   map.on('click', 'clusters', function (e) {
-    var features = map.queryRenderedFeatures(e.point, {
+    const features = map.queryRenderedFeatures(e.point, {
       layers: ['clusters'],
     });
-    var clusterId = features[0].properties.cluster_id;
+    const clusterId = features[0].properties.cluster_id;
     map
       .getSource('campgrounds')
       .getClusterExpansionZoom(clusterId, function (err, zoom) {
@@ -93,7 +93,7 @@ map.on('load', function () {
   // description HTML from its properties.
   map.on('click', 'unclustered-point', function (e) {
     const { popUpMarkup } = e.features[0].properties;
-    var coordinates = e.features[0].geometry.coordinates.slice();
+    const coordinates = e.features[0].geometry.coordinates.slice();
 
     // Ensure that if the map is zoomed out such that
     // multiple copies of the feature are visible, the
