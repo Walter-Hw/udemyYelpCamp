@@ -30,6 +30,7 @@ const seedDB = async () => {
       title: `${sample(descriptors)} ${sample(places)}`,
       description: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate reprehenderit voluptas vero possimus corrupti, aliquid repellat laudantium animi tempore! Dignissimos, esse itaque.`,
       price: price,
+      geometry: { type: 'Point', coordinates: [-117.8103, 34.0286] },
       images: [
         {
           url:
