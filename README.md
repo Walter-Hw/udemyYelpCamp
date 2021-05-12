@@ -40,15 +40,15 @@ Create A New Campground
 
 ## How to use?
 
-- Open the **[Home page](https://thawing-brushlands-38475.herokuapp.com/)**
+- Open **[home page](https://thawing-brushlands-38475.herokuapp.com/)**
 - You can browse the campground information RIGHT AWAY
 - _But you can't leave a comment on every campground without login_
 
   ##### If you want to leave a comment :
 
-- Click the [register](https://thawing-brushlands-38475.herokuapp.com/register) button on the upper right corner
+- Click [register](https://thawing-brushlands-38475.herokuapp.com/register) button on the upper right corner
 - Type your information and submit
-- You are free to [CREATE](https://thawing-brushlands-38475.herokuapp.com/campgrounds/new) a campground or leave a comment now
+- You are free to [create](https://thawing-brushlands-38475.herokuapp.com/campgrounds/new) a campground or leave a comment now
 - You can edit the campground you created anytime
 
 ## Credits
