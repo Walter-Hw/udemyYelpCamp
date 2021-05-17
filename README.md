@@ -28,6 +28,7 @@ Create A New Campground
 
 - Javascript
 - Express / Express.session
+- Passport Authentication
 - EJS
 - MongoDB / Mongoose / Atlas
 - CSS / HTML
