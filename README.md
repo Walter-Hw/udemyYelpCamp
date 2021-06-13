@@ -37,7 +37,6 @@ Create A New Campground
 
 - You can register or sign in to create new campground
 - You can see a map on the [Campgrounds Show Page](https://thawing-brushlands-38475.herokuapp.com/campgrounds) to know how many campgrounds had been uploaded by other users
--
 
 ## How to use?
 
